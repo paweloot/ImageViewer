@@ -15,12 +15,11 @@
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:theme="@style/Theme.Leanback"
-            tools:ignore="GoogleAppIndexingWarning"
-            android:banner="@drawable/banner">
+            tools:ignore="GoogleAppIndexingWarning" android:banner="@string/app_name">
         <activity
                 android:name=".MainActivity"
                 android:label="@string/app_name"
-                android:theme="@style/Theme.Leanback"
+                android:theme="@style/Theme.Leanback.Browse"
                 android:screenOrientation="landscape"
         >
             <intent-filter>
