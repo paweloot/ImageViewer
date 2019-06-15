@@ -2,22 +2,23 @@ package com.paweloot.imageviewer
 
 import android.graphics.Color
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.leanback.widget.ImageCardView
 import androidx.leanback.widget.Presenter
+import com.squareup.picasso.Picasso
 
 class CardPresenter : Presenter() {
 
     override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
-
         val cardView = object : ImageCardView(parent.context) {
             override fun setSelected(selected: Boolean) {
-                updateCardBackgroundColor(this, selected)
+                updateCardBackgroundColor(this, parent, selected)
                 super.setSelected(selected)
             }
         }
 
         cardView.isFocusable = true
-        updateCardBackgroundColor(cardView, false)
+        updateCardBackgroundColor(cardView, parent, false)
         return ViewHolder(cardView)
     }
 
@@ -28,21 +29,27 @@ class CardPresenter : Presenter() {
         cardView.titleText = image.title
         cardView.setMainImageDimensions(CARD_WIDTH, CARD_HEIGHT)
 
-        cardView.mainImage = image.imageDrawable
+        loadImage(image.imageUrl, cardView.mainImageView)
+    }
+
+    private fun loadImage(imageUrl: String, target: ImageView) {
+        Picasso.get()
+            .load(imageUrl)
+            .into(target)
     }
 
     override fun onUnbindViewHolder(viewHolder: ViewHolder) {
         val cardView = viewHolder.view as ImageCardView
 
-        cardView.badgeImage = null
         cardView.mainImage = null
     }
 
-    private fun updateCardBackgroundColor(view: ImageCardView, selected: Boolean) {
-        val color = if (selected) Color.parseColor("#303F9F") else Color.BLACK
+    private fun updateCardBackgroundColor(view: ImageCardView, parent: ViewGroup, selected: Boolean) {
+        val selectionColor = parent.context.getColor(R.color.browse_header)
+        val currentColor = if (selected) selectionColor else Color.BLACK
 
-        view.setBackgroundColor(color)
-        view.setInfoAreaBackgroundColor(color)
+        view.setBackgroundColor(currentColor)
+        view.setInfoAreaBackgroundColor(currentColor)
     }
 
     companion object {

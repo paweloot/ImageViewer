@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">Image Viewer</string>
-    <string name="browse_title">Your Albums</string>
-
+    <string name="fullscreen_image_description">Fullscreen selected image</string>
 </resources>

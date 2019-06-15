@@ -1,5 +1,4 @@
 <resources>
     <color name="browse_header">#303F9F</color>
-    <color name="browse_search">#E64A19</color>
     <color name="default_background">#333333</color>
 </resources>
